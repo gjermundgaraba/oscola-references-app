@@ -62,7 +62,8 @@ function copyBibliography() {
 
 
 function copyToClip(str: string) {
-  function listener(e) {
+  function listener(e: ClipboardEvent) {
+    if (e.clipboardData === null) return;
     e.clipboardData.setData("text/html", str);
     e.clipboardData.setData("text/plain", str);
     e.preventDefault();
