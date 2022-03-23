@@ -94,7 +94,7 @@ function copyToClip(str: string) {
   <n-form-item label="Journal name">
     <n-input v-model:value="model.journalName" />
   </n-form-item>
-  <n-form-item label="Volumen number">
+  <n-form-item label="Volume number">
     <n-input v-model:value="model.volumeNumber" />
   </n-form-item>
   <n-form-item label="First page">
