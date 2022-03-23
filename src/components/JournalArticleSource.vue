@@ -34,8 +34,8 @@ function addAuthor() {
 
 watch(model, (newModel) => {
   footnote.value = newModel.volumeNumber !== "" ?
-      Mustache.render("{{ #authors }}{{ firstName }} {{ lastName }}, {{ /authors }}‘{{ title }}’ ({{ year }}) {{ volumeNumber }} {{ journalName }} {{ firstPage }}", newModel) :
-      Mustache.render("{{ #authors }}{{ firstName }} {{ lastName }}, {{ /authors }}‘{{ title }}’ [{{ year }}] {{ journalName }} {{ firstPage }}", newModel)
+      Mustache.render("{{ #authors }}{{ firstName }} {{ lastName }}, {{ /authors }}‘{{ title }}’ ({{ year }}) {{ volumeNumber }} {{ journalName }} {{ firstPage }}.", newModel) :
+      Mustache.render("{{ #authors }}{{ firstName }} {{ lastName }}, {{ /authors }}‘{{ title }}’ [{{ year }}] {{ journalName }} {{ firstPage }}.", newModel)
   bibliography.value = newModel.volumeNumber !== "" ?
       Mustache.render("{{ #authors }}{{ lastName }} {{ firstNameInitials }}, {{ /authors }}‘{{ title }}’ ({{ year }}) {{ volumeNumber }} {{ journalName }} {{ firstPage }}", newModel) :
       Mustache.render("{{ #authors }}{{ lastName }} {{ firstNameInitials }}, {{ /authors }}‘{{ title }}’ [{{ year }}] {{ journalName }} {{ firstPage }}", newModel)
