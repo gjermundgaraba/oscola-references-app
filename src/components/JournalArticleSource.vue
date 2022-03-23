@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {NFormItem, NInput, NInputNumber, NButton, useNotification } from "naive-ui";
-import type {NotificationType} from "naive-ui";
 import {ref, reactive, watch} from "vue";
 import Mustache from "mustache";
 
@@ -14,15 +13,13 @@ const createAuthor = () => ({
 
 const model = reactive({
   title: "",
-  edition: "",
-  publisher: "",
   year: 0,
+  journalName: "",
+  volumeNumber: "",
+  firstPage: 0,
   authors: [
     createAuthor()
-  ],
-  editionLowercase() {
-    return this.edition.toLowerCase();
-  },
+  ]
 })
 
 const footnote = ref("");
@@ -36,8 +33,12 @@ function addAuthor() {
 }
 
 watch(model, (newModel) => {
-  footnote.value = Mustache.render("{{ #authors }}{{ firstName }} {{ lastName }}, {{ /authors }}<i>{{ title }}</i> ({{ editionLowercase }} edn, {{ publisher }} {{ year }}).", newModel)
-  bibliography.value = Mustache.render("{{ #authors }}{{ lastName }} {{ firstNameInitials }}, {{ /authors }}<i>{{ title }}</i> ({{ editionLowercase }} edn, {{ publisher }} {{ year }})", newModel)
+  footnote.value = newModel.volumeNumber !== "" ?
+      Mustache.render("{{ #authors }}{{ firstName }} {{ lastName }}, {{ /authors }}‘{{ title }}’ ({{ year }}) {{ volumeNumber }} {{ journalName }} {{ firstPage }}", newModel) :
+      Mustache.render("{{ #authors }}{{ firstName }} {{ lastName }}, {{ /authors }}‘{{ title }}’ [{{ year }}] {{ journalName }} {{ firstPage }}", newModel)
+  bibliography.value = newModel.volumeNumber !== "" ?
+      Mustache.render("{{ #authors }}{{ lastName }} {{ firstNameInitials }}, {{ /authors }}‘{{ title }}’ ({{ year }}) {{ volumeNumber }} {{ journalName }} {{ firstPage }}", newModel) :
+      Mustache.render("{{ #authors }}{{ lastName }} {{ firstNameInitials }}, {{ /authors }}‘{{ title }}’ [{{ year }}] {{ journalName }} {{ firstPage }}", newModel)
 })
 
 function copyFootnote() {
@@ -87,14 +88,17 @@ function copyToClip(str: string) {
   <n-form-item label="Title">
     <n-input v-model:value="model.title" />
   </n-form-item>
-  <n-form-item label="Edition">
-    <n-input v-model:value="model.edition" />
-  </n-form-item>
-  <n-form-item label="Publisher">
-    <n-input v-model:value="model.publisher" />
-  </n-form-item>
   <n-form-item label="Year">
     <n-input-number v-model:value="model.year" />
+  </n-form-item>
+  <n-form-item label="Journal name">
+    <n-input v-model:value="model.journalName" />
+  </n-form-item>
+  <n-form-item label="Volumen number">
+    <n-input v-model:value="model.volumeNumber" />
+  </n-form-item>
+  <n-form-item label="First page">
+    <n-input-number v-model:value="model.firstPage" />
   </n-form-item>
   <div @click="copyFootnote" ref="footnoteOutputHtml" v-html="footnote"></div>
   <div @click="copyBibliography" ref="bibliographyOutputHtml" v-html="bibliography"></div>
