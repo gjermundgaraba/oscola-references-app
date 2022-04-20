@@ -6,12 +6,16 @@ import {ref} from "vue";
 import JournalArticleSource from "@/components/JournalArticleSource.vue";
 import TreatyInternationalSource from "@/components/TreatyInternationalSource.vue";
 import JudgementECtHRSource from "@/components/JudgementECtHRSource.vue";
+import EUDirectiveSource from "@/components/EUDirectiveSource.vue";
+import JudgementCJEUSource from "@/components/JudgementCJEUSource.vue";
 
 const sources = ref([
   { label: "Book", value: "BookSource" },
   { label: "Journal article", value: "JournalArticleSource" },
   { label: "Treaty - international", value: "TreatyInternationalSource" },
   { label: "Judgement ECtHR", value: "JudgementECtHRSource" },
+  { label: "EU directive", value: "EUDirectiveSource" },
+  { label: "Judgement CJEU", value: "JudgementCJEUSource" },
   /*{ label: "Contribution to edited book", value: "ContributionToEditedBookSource" },
   { label: "EU Commission document", value: "BookSource" },
   { label: "EU directive", value: "BookSource" },
@@ -44,6 +48,8 @@ const dt = darkTheme;
         <JournalArticleSource v-if="selectedSource === 'JournalArticleSource'"></JournalArticleSource>
         <TreatyInternationalSource v-if="selectedSource === 'TreatyInternationalSource'"></TreatyInternationalSource>
         <JudgementECtHRSource v-if="selectedSource === 'JudgementECtHRSource'"></JudgementECtHRSource>
+        <EUDirectiveSource v-if="selectedSource === 'EUDirectiveSource'"></EUDirectiveSource>
+        <JudgementCJEUSource v-if="selectedSource === 'JudgementCJEUSource'"></JudgementCJEUSource>
       </main>
       <footer>Made by <a href="https://github.com/bjaanes" target="_blank">Gjermund Garaba</a> - with ❤️</footer>
     </n-notification-provider>
