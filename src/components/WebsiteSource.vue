@@ -14,15 +14,13 @@ const createAuthor = () => ({
 
 const model = reactive({
   title: "",
-  edition: "",
-  publisher: "",
-  year: 0,
+  websiteName: "",
+  date: "",
+  url: "",
+  dateAccessed: "",
   authors: [
     createAuthor()
-  ],
-  editionLowercase() {
-    return this.edition.toLowerCase();
-  },
+  ]
 })
 
 const footnote = ref("");
@@ -36,8 +34,8 @@ function addAuthor() {
 }
 
 watch(model, (newModel) => {
-  footnote.value = Mustache.render("{{ #authors }}{{ firstName }} {{ lastName }}, {{ /authors }}<i>{{ title }}</i> ({{ editionLowercase }} edn, {{ publisher }} {{ year }}).", newModel)
-  bibliography.value = Mustache.render("{{ #authors }}{{ lastName }} {{ firstNameInitials }}, {{ /authors }}<i>{{ title }}</i> ({{ editionLowercase }} edn, {{ publisher }} {{ year }})", newModel)
+  footnote.value = Mustache.render("{{ #authors }}{{ firstName }} {{ lastName }}, {{ /authors }}{{ title }} (<i>{{ websiteName }}</i>, {{ date }}) &lt;{{url}}&gt; accessed {{ dateAccessed }}.", newModel)
+  bibliography.value = Mustache.render("{{ #authors }}{{ lastName }} {{ firstNameInitials }}, {{ /authors }}{{ title }} (<i>{{ websiteName }}</i>, {{ date }}) &lt;{{url}}&gt; accessed {{ dateAccessed }}", newModel)
 })
 
 function copyFootnote() {
@@ -87,14 +85,17 @@ function copyToClip(str: string) {
   <n-form-item label="Title">
     <n-input v-model:value="model.title" />
   </n-form-item>
-  <n-form-item label="Edition">
-    <n-input v-model:value="model.edition" />
+  <n-form-item label="Website name">
+    <n-input v-model:value="model.websiteName" />
   </n-form-item>
-  <n-form-item label="Publisher">
-    <n-input v-model:value="model.publisher" />
+  <n-form-item label="Date">
+    <n-input v-model:value="model.date" />
   </n-form-item>
-  <n-form-item label="Year">
-    <n-input-number v-model:value="model.year" />
+  <n-form-item label="URL">
+    <n-input v-model:value="model.url" />
+  </n-form-item>
+  <n-form-item label="Date accessed">
+    <n-input v-model:value="model.dateAccessed" />
   </n-form-item>
   <div @click="copyFootnote" ref="footnoteOutputHtml" v-html="footnote"></div>
   <div @click="copyBibliography" ref="bibliographyOutputHtml" v-html="bibliography"></div>

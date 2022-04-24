@@ -7,6 +7,7 @@ import JournalArticleSource from "@/components/JournalArticleSource.vue";
 import TreatyInternationalSource from "@/components/TreatyInternationalSource.vue";
 import JudgementECtHRSource from "@/components/JudgementECtHRSource.vue";
 import EUDirectiveSource from "@/components/EUDirectiveSource.vue";
+import WebsiteSource from "@/components/WebsiteSource.vue";
 import JudgementCJEUSource from "@/components/JudgementCJEUSource.vue";
 
 const sources = ref([
@@ -16,6 +17,7 @@ const sources = ref([
   { label: "Judgement ECtHR", value: "JudgementECtHRSource" },
   { label: "EU directive", value: "EUDirectiveSource" },
   { label: "Judgement CJEU", value: "JudgementCJEUSource" },
+  { label: "Website", value: "WebsiteSource" },
   /*{ label: "Contribution to edited book", value: "ContributionToEditedBookSource" },
   { label: "EU Commission document", value: "BookSource" },
   { label: "EU directive", value: "BookSource" },
@@ -30,8 +32,7 @@ const sources = ref([
   { label: "Other", value: "BookSource" },
 
   { label: "Treaty - regional", value: "BookSource" },
-  { label: "UN document", value: "BookSource" },
-  { label: "Website", value: "BookSource" },*/
+  { label: "UN document", value: "BookSource" },*/
 ]);
 
 const selectedSource = ref();
@@ -50,6 +51,7 @@ const dt = darkTheme;
         <JudgementECtHRSource v-if="selectedSource === 'JudgementECtHRSource'"></JudgementECtHRSource>
         <EUDirectiveSource v-if="selectedSource === 'EUDirectiveSource'"></EUDirectiveSource>
         <JudgementCJEUSource v-if="selectedSource === 'JudgementCJEUSource'"></JudgementCJEUSource>
+        <WebsiteSource v-if="selectedSource === 'WebsiteSource'"></WebsiteSource>
       </main>
       <footer>Made by <a href="https://github.com/bjaanes" target="_blank">Gjermund Garaba</a> - with ❤️</footer>
     </n-notification-provider>
