@@ -21,7 +21,10 @@ const model = reactive({
     createAuthor()
   ],
   editionLowercase() {
-    return this.edition.toLowerCase();
+    if (this.edition) {
+      return this.edition.toLowerCase();
+    }
+
   },
 })
 
@@ -36,8 +39,8 @@ function addAuthor() {
 }
 
 watch(model, (newModel) => {
-  footnote.value = Mustache.render("{{ #authors }}{{ firstName }} {{ lastName }}, {{ /authors }}<i>{{ title }}</i> ({{ editionLowercase }} edn, {{ publisher }} {{ year }}).", newModel)
-  bibliography.value = Mustache.render("{{ #authors }}{{ lastName }} {{ firstNameInitials }}, {{ /authors }}<i>{{ title }}</i> ({{ editionLowercase }} edn, {{ publisher }} {{ year }})", newModel)
+  footnote.value = Mustache.render("{{ #authors }}{{ firstName }} {{ lastName }}, {{ /authors }}<i>{{ title }}</i> ({{#editionLowercase}}{{ . }} edn, {{/editionLowercase}}{{ publisher }} {{ year }}).", newModel)
+  bibliography.value = Mustache.render("{{ #authors }}{{ lastName }} {{ firstNameInitials }}, {{ /authors }}<i>{{ title }}</i> ({{#editionLowercase}}{{ . }} edn, {{/editionLowercase}}{{ publisher }} {{ year }})", newModel)
 })
 
 function copyFootnote() {
