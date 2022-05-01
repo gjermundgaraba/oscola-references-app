@@ -34,8 +34,8 @@ function addAuthor() {
 }
 
 watch(model, (newModel) => {
-  footnote.value = Mustache.render("{{ #authors }}{{ firstName }} {{ lastName }}, {{ /authors }}{{ title }} (<i>{{ websiteName }}</i>, {{ date }}) &lt;{{url}}&gt; accessed {{ dateAccessed }}.", newModel)
-  bibliography.value = Mustache.render("{{ #authors }}{{ lastName }} {{ firstNameInitials }}, {{ /authors }}{{ title }} (<i>{{ websiteName }}</i>, {{ date }}) &lt;{{url}}&gt; accessed {{ dateAccessed }}", newModel)
+  footnote.value = Mustache.render("{{ #authors }}{{ firstName }} {{ lastName }}, {{ /authors }}'{{ title }}' (<i>{{ websiteName }}</i>, {{ date }}) &lt;{{url}}&gt; accessed {{ dateAccessed }}.", newModel)
+  bibliography.value = Mustache.render("{{ #authors }}{{ lastName }} {{ firstNameInitials }}, {{ /authors }}'{{ title }}' (<i>{{ websiteName }}</i>, {{ date }}) &lt;{{url}}&gt; accessed {{ dateAccessed }}", newModel)
 })
 
 function copyFootnote() {
