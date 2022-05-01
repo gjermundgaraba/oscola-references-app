@@ -18,7 +18,7 @@ const footnoteOutputHtml = ref<HTMLInputElement | null>(null);
 const notification = useNotification()
 
 watch(model, (newModel) => {
-  footnote.value = Mustache.render("{{ titleTreaty }} ({{ adopted }}, {{ enteredIntoForce }}) {{ treatySeries }} {{ firstPage }} ({{ shortTitle }}).", newModel)
+  footnote.value = Mustache.render("{{ titleTreaty }} (adopted {{ adopted }}, entered into force {{ enteredIntoForce }}) {{ treatySeries }} {{ firstPage }} ({{ shortTitle }}).", newModel)
 })
 
 function copyFootnote() {
